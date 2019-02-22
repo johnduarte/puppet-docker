@@ -1,0 +1,33 @@
+#!/bin/bash
+usage() {
+    echo "usage: change_hostname.sh new_hostname"
+}
+if [ -z "$1" ] ; then
+    usage
+    exit
+fi
+
+# Must be exported to use in sudo's environment.
+export NEW_HOSTNAME="$1"
+
+# Preserve the environment or sudo will lose the
+# exported variable. Also, we must explicitly
+# execute on localhost rather than relying on
+# whatever sudo thinks the current hostname is to
+# avoid "sudo: unable to resolve host" errors.
+sudo \
+    --preserve-env \
+    --host=localhost \
+    -- \
+    sed --in-place \
+        "s/${HOSTNAME}/${NEW_HOSTNAME}/g" \
+        /etc/hostname /etc/hosts
+sudo \
+    --preserve-env \
+    --host=localhost \
+    -- \
+    hostname "$NEW_HOSTNAME"
+
+# Replace the current shell in order to pick up the
+# new hostname in the PS1 prompt.
+exec "$SHELL"
