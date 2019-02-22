@@ -1,7 +1,8 @@
 # Managing Docker with Puppet
 Ref: https://www.linuxjournal.com/content/managing-docker-instances-puppet
 
-## Usage
+
+## Provisioning
 This repo includes a `Vagrantfile` and `docker.pp` puppet manifest. To
 facilitate provisioning a VM that used puppet to manage docker a container.
 This container runs an instance of the apache webserver.  The container's port
