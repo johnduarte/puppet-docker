@@ -11,14 +11,11 @@ the host machine, it will also be mapped to port 8080 on the local machine.
 With these two files, the end result of a containerized apache instance
 port mapped to localhost is achieved with the following commands.  In
 the example below the `local` hostname refers to commands run from your
-development environment and the `ubuntu-bionic` hostname refers to commands
-run from the vagrant instance.
+development environment.
 
 ```
-local:~$ vagrant up      # this provisions an Ubuntu 18.04 VM and installs
-                         # puppet on it
-local:~$ vagrant ssh     # connect to the vagrant instance
-
-ubuntu-bionic:~$ sudo puppet module install puppetlabs-docker
-ubuntu-bionic:~$ sudo puppet apply /vagrant/docker.pp
+local:~$ vagrant up      # this provisions an Ubuntu 18.04 VM.
+                         # Puppet and required modules are installed.  Then
+                         # puppet manifest is applied to realize the docker
+                         # container resource.
 ```

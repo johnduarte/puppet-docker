@@ -20,6 +20,8 @@ Vagrant.configure(2) do |config|
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get -y install puppet
+    puppet module install puppetlabs-docker
+    puppet apply /vagrant/docker.pp
   SHELL
 end
 
